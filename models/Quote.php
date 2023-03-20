@@ -37,8 +37,8 @@
           $query = "SELECT
           q.id,
           q.quote_string,
-          author_id,
-          category_id
+          a.author_name as author,
+          c.category_name as category
           FROM " . $this->table . " q
           INNER JOIN author a on q.author_id = a.id
           INNER JOIN categories c on q.category_id = c.id

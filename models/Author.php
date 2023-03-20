@@ -71,8 +71,7 @@ class Author
         // Create Query
         $query = 'INSERT INTO ' .
             $this->table . '
-    SET
-      author_name = :author_name';
+    (author_name) VALUES (:author_name)';
 
         // Prepare Statement
         $stmt = $this->conn->prepare($query);

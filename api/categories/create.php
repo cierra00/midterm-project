@@ -18,8 +18,8 @@
   // Get raw category data
   $data = json_decode(file_get_contents("php://input"));
 
-  $category->id = $data->id;
-  $category->category_name = $data->name;
+ 
+  $category->category_name = $data->category_name;
   
 
   // Create Category

@@ -22,7 +22,7 @@ class Category
         // Create query
         $query = 'SELECT
         id,
-        name
+        category_name
       FROM
         ' . $this->table . '
       ORDER BY
@@ -71,8 +71,7 @@ class Category
         // Create Query
         $query = 'INSERT INTO ' .
             $this->table . '
-    SET
-      category_name = :category_name';
+    (category_name) VALUES (:category_name)';
 
         // Prepare Statement
         $stmt = $this->conn->prepare($query);
@@ -109,11 +108,11 @@ class Category
         $stmt = $this->conn->prepare($query);
 
         // Clean data
-        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->category_name = htmlspecialchars(strip_tags($this->category_name));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
         // Bind data
-        $stmt->bindParam(':name', $this->name);
+        $stmt->bindParam(':category_name', $this->category_name);
         $stmt->bindParam(':id', $this->id);
 
         // Execute query
