@@ -17,7 +17,7 @@
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
-  $author->author_name = $data->author_name;
+  $author->author = $data->author;
 
   // Create Category
   if($author->create()) {

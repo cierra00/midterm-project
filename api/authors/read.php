@@ -30,7 +30,7 @@
 
           $auth_item = array(
             'id' => $id,
-            'author_name' => $author_name
+            'author' => $author
           );
 
           // Push to "data"

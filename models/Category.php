@@ -7,7 +7,7 @@ class Category
 
     // Properties
     public $id;
-    public $category_name;
+    public $category;
     
 
     // Constructor with DB
@@ -22,7 +22,7 @@ class Category
         // Create query
         $query = 'SELECT
         id,
-        category_name
+        category
       FROM
         ' . $this->table . '
       ORDER BY
@@ -43,7 +43,7 @@ class Category
         // Create query
         $query = 'SELECT
         id,
-        category_name
+        category
       FROM
         ' . $this->table . '
     WHERE id = :id
@@ -62,7 +62,7 @@ class Category
 
         // set properties
         $this->id = $row['id'];
-        $this->category_name = $row['category_name'];
+        $this->category = $row['category'];
     }
 
     // Create Category
@@ -71,16 +71,16 @@ class Category
         // Create Query
         $query = 'INSERT INTO ' .
             $this->table . '
-    (category_name) VALUES (:category_name)';
+    (category) VALUES (:category)';
 
         // Prepare Statement
         $stmt = $this->conn->prepare($query);
 
         // Clean data
-        $this->category_name = htmlspecialchars(strip_tags($this->category_name));
+        $this->category = htmlspecialchars(strip_tags($this->category));
 
         // Bind data
-        $stmt->bindParam(':category_name', $this->category_name);
+        $stmt->bindParam(':category', $this->category);
 
         // Execute query
         if ($stmt->execute()) {
@@ -100,7 +100,7 @@ class Category
         $query = 'UPDATE ' .
             $this->table . '
     SET
-      category_name = :category_name
+      category = :category
       WHERE
       id = :id';
 
@@ -108,11 +108,11 @@ class Category
         $stmt = $this->conn->prepare($query);
 
         // Clean data
-        $this->category_name = htmlspecialchars(strip_tags($this->category_name));
+        $this->category = htmlspecialchars(strip_tags($this->category));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
         // Bind data
-        $stmt->bindParam(':category_name', $this->category_name);
+        $stmt->bindParam(':category', $this->category);
         $stmt->bindParam(':id', $this->id);
 
         // Execute query

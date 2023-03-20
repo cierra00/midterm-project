@@ -7,7 +7,7 @@ class Author
 
     // Properties
     public $id;
-    public $author_name;
+    public $author;
     
 
     // Constructor with DB
@@ -22,7 +22,7 @@ class Author
         // Create query
         $query = 'SELECT
         id,
-        author_name
+        author
         FROM
         ' . $this->table . '
       ORDER BY
@@ -43,7 +43,7 @@ class Author
         // Create query
         $query = 'SELECT
           id,
-          author_name
+          author
         FROM
           ' . $this->table . '
       WHERE id = :id
@@ -62,7 +62,7 @@ class Author
 
         // set properties
         $this->id = $row['id'];
-        $this->author_name = $row['author_name'];
+        $this->author = $row['author'];
     }
 
     // Create Author
@@ -71,16 +71,16 @@ class Author
         // Create Query
         $query = 'INSERT INTO ' .
             $this->table . '
-    (author_name) VALUES (:author_name)';
+    (author) VALUES (:author)';
 
         // Prepare Statement
         $stmt = $this->conn->prepare($query);
 
         // Clean data
-        $this->author_name = htmlspecialchars(strip_tags($this->author_name));
+        $this->author = htmlspecialchars(strip_tags($this->author));
 
         // Bind data
-        $stmt->bindParam(':author_name', $this->author_name);
+        $stmt->bindParam(':author', $this->author);
 
         // Execute query
         if ($stmt->execute()) {
@@ -100,7 +100,7 @@ class Author
         $query = 'UPDATE ' .
             $this->table . '
     SET
-      author_name = :author_name
+      author = :author
       WHERE
       id = :id';
 
@@ -108,11 +108,11 @@ class Author
         $stmt = $this->conn->prepare($query);
 
         // Clean data
-        $this->author_name = htmlspecialchars(strip_tags($this->author_name));
+        $this->author = htmlspecialchars(strip_tags($this->author));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
         // Bind data
-        $stmt->bindParam(':author_name', $this->author_name);
+        $stmt->bindParam(':author', $this->author);
         $stmt->bindParam(':id', $this->id);
 
         // Execute query

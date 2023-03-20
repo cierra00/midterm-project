@@ -27,7 +27,7 @@ $author->read_single();
 //create array
 $auth_arr = array(
     'id'=> $author->id,
-    'author_name'=> $author->author_name,
+    'author'=> $author->author,
     
 );
 
