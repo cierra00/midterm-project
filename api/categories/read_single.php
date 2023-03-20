@@ -25,14 +25,14 @@ $category->id = isset($_GET['id']) ? $_GET['id']: die();
 $category->read_single();
 
 //create array
-$cat_arr = array(
+$auth_arr = array(
     'id'=> $category->id,
-    'category_name'=> $category->category_name,
+    'author'=> $category->category,
     
 );
 
 // make JSON
-print_r(json_encode($cat_arr));
+print_r(json_encode($auth_arr));
 
 //
 

@@ -24,16 +24,16 @@ $author->id = isset($_GET['id']) ? $_GET['id']: die();
 // Get post 
 $author->read_single();
 
+if($author->author !== null) {
 //create array
 $auth_arr = array(
     'id'=> $author->id,
-    'author'=> $author->author,
+    'author'=> $author->author
     
 );
 
 // make JSON
 print_r(json_encode($auth_arr));
-
-//
-
-
+} else  {
+  print_r(json_encode (array("message"=> "Author ID Not Found")));
+}

@@ -30,9 +30,10 @@
 
           $quo_item = array(
             'id' => $id,
-            'quote_string' => $quote_string,
-            'category_id' => $category_id,
-            'author_id' => $author_id
+            'quote' => $quote,
+            'author' => $author,
+            'category' => $category
+            
           );
 
           // Push to "data"

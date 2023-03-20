@@ -12,7 +12,7 @@
   $db = $database->connect();
 
   // Instantiate blog post object
-  $category = new Author($db);
+  $author = new Author($db);
 
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));

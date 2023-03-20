@@ -22,24 +22,27 @@ $quote = new Quote($db);
 $quote->id = isset($_GET['id']) ? $_GET['id']: die();
 
 // Get post 
-if($quote->read_single()){
+$quote->read_single();
+
+//create array
 
 //create array
 $quo_arr = array(
     'id'=> $quote->id,
-    'quote_string'=> $quote->quote_string,
-    'author_id' => $quote->author_id,
-    'category_id' => $quote->category_id,
+    'quote'=> $quote->quote,
+    'author' => $quote->author,
+    'category' => $quote->category,
     
 );
-} else {
-  $quo_arr = array(
-    'message' => 'There are no quotes here'
-  );
-}
+if($quote->quote !== null){
 // make JSON
 print_r(json_encode($quo_arr));
-
+} else {
+  
+  echo (json_encode (array("message"=> "Quotes Not Found")));
+}
 //
+
+
 
 

@@ -12,4 +12,4 @@ header('Access-Control-Allow-Origin: *');
 
     ?>
 
-    <h1>Categories</h1>
+    <h1>Authors</h1>

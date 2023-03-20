@@ -17,7 +17,10 @@
   // Get raw quote data
   $data = json_decode(file_get_contents("php://input"));
 
-  $author->author_name = $data->name;
+  $quotes->quote = $data->id;
+  $quotes->quote = $data->quote;
+  $quotes->quote = $data->author_id;
+  $quotes->quote = $data->category_id;
 
   // Create Category
   if($author->create()) {

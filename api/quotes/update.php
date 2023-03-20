@@ -20,7 +20,7 @@
   // Set ID to UPDATE
   $quote->id = $data->id;
 
-  $quote->quote_string = $data->quote_string;
+  $quote->quote = $data->quote;
 
   // Update quote
   if($quote->update()) {

@@ -16,17 +16,17 @@ class Category
         $this->conn = $db;
     }
 
-    // Get categories
+    // Get Categories
     public function read()
     {
         // Create query
         $query = 'SELECT
         id,
         category
-      FROM
+        FROM
         ' . $this->table . '
       ORDER BY
-        id';
+        id DESC';
 
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -42,12 +42,12 @@ class Category
     {
         // Create query
         $query = 'SELECT
-        id,
-        category
-      FROM
-        ' . $this->table . '
-    WHERE id = :id
-    LIMIT 1 OFFSET 0';
+          id,
+          category
+        FROM
+          ' . $this->table . '
+      WHERE id = :id
+      LIMIT 1 OFFSET 0';
 
         //Prepare statement
         $stmt = $this->conn->prepare($query);

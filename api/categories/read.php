@@ -30,12 +30,12 @@
 
           $cat_item = array(
             'id' => $id,
-            'category_name' => $category_name
+            'category' => $category
           );
 
           // Push to "data"
           array_push($cat_arr, $cat_item);
-        }
+        } 
 
         // Turn to JSON & output
         echo json_encode($cat_arr);

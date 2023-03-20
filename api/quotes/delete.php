@@ -12,16 +12,17 @@
   $db = $database->connect();
 
   // Instantiate quote object
-  $category = new Author($db);
+  $quote = new Quote($db);
 
   // Get raw quote data
   $data = json_decode(file_get_contents("php://input"));
 
   // Set ID to UPDATE
-  $author->id = $data->id;
+  $quote->id = $data->id;
+  
 
   // Delete post
-  if($author->delete()) {
+  if($quote->delete()) {
     echo json_encode(
       array('message' => 'Author deleted')
     );

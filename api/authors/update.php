@@ -20,7 +20,9 @@
   // Set ID to UPDATE
   $author->id = $data->id;
 
-  $category->name = $data->name;
+  $author->id = $data->id;
+  $author->author = $data->author;
+  
 
   // Update post
   if($author->update()) {

@@ -140,7 +140,7 @@ class Author
 
         // Bind Data
         $stmt->bindParam(':id', $this->id);
-
+        $stmt->bindParam(':author', $this->author);
         // Execute query
         if ($stmt->execute()) {
             return true;
