@@ -12,23 +12,23 @@
   $db = $database->connect();
 
   // Instantiate quote object
-  $author = new Author($db);
+  $quotes = new quote($db);
 
   // Get raw quote data
   $data = json_decode(file_get_contents("php://input"));
 
   $quotes->quote = $data->id;
   $quotes->quote = $data->quote;
-  $quotes->quote = $data->author_id;
-  $quotes->quote = $data->category_id;
+ $quotes->quote = $data->author_id;
+ $quotes->quote = $data->category_id;
 
   // Create Category
-  if($author->create()) {
+  if($quotes->create()) {
     echo json_encode(
-      array('message' => 'Author Created')
+      array('message' => 'Quote Created')
     );
   } else {
     echo json_encode(
-      array('message' => 'Author Not Created')
+      array('message' => 'Quote Not Created')
     );
   }

@@ -4,14 +4,14 @@
   header('Content-Type: application/json');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Author.php';
+  include_once '../../models/Authors.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate category object
-  $author = new Author($db);
+  $author = new Authors($db);
 
   // Category read query
   $result = $author->read();

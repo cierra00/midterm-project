@@ -6,7 +6,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../config/Database.php';
-include_once '../../models/Author.php';
+include_once '../../models/Authors.php';
 
 
 //Instantiate DB & Connect
@@ -16,7 +16,7 @@ $database = new Database();
 
 //Instantiate blog post object
 
-$author = new Author($db);
+$author = new Authors($db);
 
 //get ID
 $author->id = isset($_GET['id']) ? $_GET['id']: die();

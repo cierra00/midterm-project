@@ -1,9 +1,9 @@
 <?php
-class Author
+class Authors
 {
     // DB Stuff
     private $conn;
-    private $table = 'author';
+    private $table = 'authors';
 
     // Properties
     public $id;
@@ -40,6 +40,7 @@ class Author
     // Get Single Author
     public function read_single()
     {
+
         // Create query
         $query = 'SELECT
           id,
@@ -53,16 +54,20 @@ class Author
         $stmt = $this->conn->prepare($query);
 
         // Bind ID
-        $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(1, $this->author);
 
         // Execute query
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        if($row > 0){
         // set properties
         $this->id = $row['id'];
         $this->author = $row['author'];
+          return true;
+        } else
+          return false;
+          
     }
 
     // Create Author
@@ -100,9 +105,9 @@ class Author
         $query = 'UPDATE ' .
             $this->table . '
     SET
-      author = :author
+      author = ?
       WHERE
-      id = :id';
+      id = ?';
 
         // Prepare Statement
         $stmt = $this->conn->prepare($query);
@@ -152,3 +157,4 @@ class Author
         return false;
     }
 }
+?>

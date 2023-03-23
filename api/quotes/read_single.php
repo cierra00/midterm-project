@@ -32,6 +32,7 @@ $quo_arr = array(
     'quote'=> $quote->quote,
     'author' => $quote->author,
     'category' => $quote->category,
+    'author_id' => $quote->author_id
     
 );
 if($quote->quote !== null){

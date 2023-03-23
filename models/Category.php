@@ -46,7 +46,7 @@ class Category
           category
         FROM
           ' . $this->table . '
-      WHERE id = :id
+      WHERE id = ?
       LIMIT 1 OFFSET 0';
 
         //Prepare statement
@@ -59,7 +59,7 @@ class Category
         $stmt->execute();
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        
         // set properties
         $this->id = $row['id'];
         $this->category = $row['category'];
@@ -100,9 +100,9 @@ class Category
         $query = 'UPDATE ' .
             $this->table . '
     SET
-      category = :category
+      category = ?
       WHERE
-      id = :id';
+      id = ?';
 
         // Prepare Statement
         $stmt = $this->conn->prepare($query);

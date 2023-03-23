@@ -21,6 +21,7 @@
     // Get Quote
     public function read() {
       // Create query
+      
       $query = 'SELECT 
                 q.id, 
                 q.quote, 
@@ -28,9 +29,9 @@
                 c.category
             FROM 
             ' . $this->table . ' q 
-            INNER JOIN author a
+            left JOIN authors a
                 ON q.author_id = a.id
-            INNER JOIN categories c
+            left JOIN categories c
                 ON q.category_id = c.id';
       
       // Prepare statement
@@ -45,16 +46,22 @@
     // Get Single Quote
     public function read_single() {
           // Create query
-          $query = "SELECT
-                     q.id,
-                     q.quote,
-                     a.author as author,
-                     c.category as category
-                     FROM " . $this->table . " q
-                     INNER JOIN author a on q.author_id = a.id
-                     INNER JOIN categories c on q.category_id = c.id
-                     WHERE q.id = :id
-                     LIMIT 1 OFFSET 0";
+          $query = 'SELECT   
+                    q.id,
+                    q.quote,
+                    a.author as author,
+                    q.author_id,
+                    c.category,
+                    q.category_id
+                FROM
+                    ' . $this->table . ' q
+                    LEFT JOIN
+                    categories c ON q.category_id = c.id
+                    LEFT JOIN
+                        authors a ON q.author_id = a.id
+                WHERE
+                    q.id = ?
+                LIMIT 1';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
@@ -73,6 +80,7 @@
                 $this->quote = $row['quote'];
                 $this->category = $row['category'];
                 $this->author = $row['author'];
+                $this->author_id = $row['author_id'];
                
          
           
@@ -82,7 +90,10 @@
     // Create Quote
     public function create() {
           // Create query
-          $query = 'INSERT INTO ' . $this->table . ' SET title = :title, body = :body, author = :author, category_id = :category_id';
+          $query = 'INSERT INTO ' . $this->table . '
+                (quote, author_id, category_id)
+                VALUES
+                (:quote, :author_id, :category_id)';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
@@ -96,12 +107,10 @@
           
 
           // Bind data
-          $stmt->bindParam(':id', $this->id);
-          $stmt->bindParam(':quote', $this->quote);
-          $stmt->bindParam(':author', $this->author);
-          $stmt->bindParam(':category', $this->category);
-          $stmt->bindParam(':author_id', $this->author_id);
-          $stmt->bindParam(':category_id', $this->category_id);
+          
+         // $stmt->bindParam(':quote', $this->quote);
+         // $stmt->bindParam(':author_id', $this->author_id);
+          //$stmt->bindParam(':category_id', $this->category_id);
           
          
 
@@ -120,8 +129,11 @@
     public function update() {
           // Create query
           $query = 'UPDATE ' . $this->table . '
-                                SET id = :id, quote = :quote, author_id = :author_id, category_id = :category_id
-                                WHERE id = :id';
+                    quote = ?,
+                    author_id = ?,
+                    category_id =?
+                    WHERE
+                    id + ?';
 
           // Prepare statement
           $stmt = $this->conn->prepare($query);
